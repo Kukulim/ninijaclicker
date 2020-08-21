@@ -18,13 +18,13 @@
         <p>skills:</p>
         <div class="row">
           <div class="col">
-            <div @click="usepowerhit()"><img src="../images/skills/a.png" alt="" class="btn btn-info skillsbutton"></div>
+            <div @click="usefury()"><img src="../images/skills/a.png" alt="" class="btn btn-info skillsbutton"></div>
           </div>
           <div class="col">
-            <div><img src="../images/skills/b.png" alt="" class="btn btn-danger skillsbutton"></div>
+            <div @click="usepowerhit()"><img src="../images/skills/b.png" alt="" class="btn btn-danger skillsbutton"></div>
           </div>
           <div class="col">
-            <div><img src="../images/skills/c.png" alt="" class="btn btn-success skillsbutton"></div>
+            <div @click="useshurikenwind()"><img src="../images/skills/c.png" alt="" class="btn btn-success skillsbutton"></div>
           </div>
         </div>
       </div>
@@ -73,7 +73,9 @@ export default {
       world: 1,
       elementVisible:false,
       skills:{
-        powerhit:{dps:2, isactive:false},
+        fury:{dps:2, isactive:false},
+        powerhit:{dps:50, isactive:false},
+        shurikenwind:{timeleft:50}
       }
     };
   },
@@ -84,8 +86,12 @@ export default {
 
       this.monster.health -=
         this.hero.hitpower + this.hero.weapon + 2 * this.hero.lvl;
+        if(this.skills.fury.isactive==true){
+          this.monster.health -=((this.hero.hitpower + this.hero.weapon + 2 * this.hero.lvl)*this.skills.fury.dps);
+        }
         if(this.skills.powerhit.isactive==true){
-          this.monster.health -=((this.hero.hitpower + this.hero.weapon + 2 * this.hero.lvl)*this.skills.powerhit.dps);
+          this.monster.health-=this.skills.powerhit.dps;
+          this.skills.powerhit.isactive=false;
         }
       if (this.monster.health <= 0) {
         this.stage++;
@@ -118,9 +124,16 @@ export default {
         this.hero.maxlvlvalue = parseInt(this.hero.maxlvlvalue * 1.1);
       }
     },
+    usefury(){
+      this.skills.fury.isactive=true;
+      setTimeout(() => this.skills.fury.isactive = false, 30000);
+    },
     usepowerhit(){
       this.skills.powerhit.isactive=true;
-      setTimeout(() => this.skills.powerhit.isactive = false, 30000)
+    },
+    useshurikenwind(){
+        var myTimer = setInterval(() => this.hit(), 500);
+        setTimeout(() =>  clearInterval(myTimer), 30000);
     }
   },
 };
