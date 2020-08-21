@@ -2,8 +2,12 @@
   <div class="container">
     <div class="row">
 
-      <div class="col"></div>  
-
+      <div class="col">
+        <div><p>hero lvl: {{hero.lvl}} Gold: {{hero.gold}}</p></div>
+        <b-progress :value="hero.exp" :max="hero.maxlvlvalue" class="mb-3"></b-progress>
+</div>
+<div>
+        </div>
       <div class="col">
         <div><p>Stage: {{stage}} World: {{world}}</p></div>
         <div>health: {{monster.health}}</div>
@@ -28,8 +32,11 @@ export default {
       },
       hero:{
         lvl:1,
+        exp:0,
+        maxlvlvalue:100,
         hitpower:1,
         weapon:2,
+        gold:0,
       },
       stage:1,
       world:1,
@@ -37,9 +44,11 @@ export default {
   },
     methods:{
     hit(){
-      this.monster.health-=(this.hero.hitpower+this.hero.weapon);
+      this.monster.health-=(this.hero.hitpower+this.hero.weapon+2*this.hero.lvl);
       if(this.monster.health <= 0){
         this.stage++;
+        this.hero.gold++;
+        this.hero.exp+=10;
         this.monster.health = this.monster.basehealth + this.stage*this.world;
         if(this.stage==25||this.stage==50||this.stage==75){
               this.monster.health=this.monster.bosshealth*this.monster.bosspower;
@@ -53,7 +62,11 @@ export default {
       if(this.stage==101){
         this.stage=1;
         this.world++;
-
+      }
+      if(this.hero.exp>=this.hero.maxlvlvalue){
+        this.hero.exp = 0;
+        this.hero.lvl++;
+        this.hero.maxlvlvalue=parseInt(this.hero.maxlvlvalue*1.1)
       }
     },
   }
