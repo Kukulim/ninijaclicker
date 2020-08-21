@@ -1,9 +1,6 @@
 @import "bootstrap.min.css";
 
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     text-align: center;
     background-color: #275540b5;
     min-height: 900px;
@@ -12,4 +9,23 @@
 .disableddiv {
   pointer-events: none;
   opacity: 0.8;
+}
+.heroimg{
+  opacity: 0.3;
+  padding:15px;
+  height: 450px;
+}
+
+.proggresbar{
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.monsterimg{
+  max-height: 300px;
+}
+
+.monsterhealthproggresbar{
+  max-width: 150px;
+  margin: 0 auto;
 }
