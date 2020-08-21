@@ -16,6 +16,17 @@
         ></b-progress>
         </div>
         <p>skills:</p>
+        <div class="row">
+          <div class="col">
+            <div @click="usepowerhit()"><img src="../images/skills/a.png" alt="" class="btn btn-info skillsbutton"></div>
+          </div>
+          <div class="col">
+            <div><img src="../images/skills/b.png" alt="" class="btn btn-danger skillsbutton"></div>
+          </div>
+          <div class="col">
+            <div><img src="../images/skills/c.png" alt="" class="btn btn-success skillsbutton"></div>
+          </div>
+        </div>
       </div>
       <div></div>
       <div class="col">
@@ -29,9 +40,9 @@
           variant='danger'
           class="mb-3"
         ></b-progress>
-        <div v-show="elementVisible" class="hideElement">-{{monster.health-monster.health}}</div>
+        <div v-show="elementVisible" class="hideElement hitpozition">-{{monster.health-monster.health}}</div>
         </div>
-        <img src="../assets/logo.png" alt="" @click="hit()" class="monsterimg" />
+        <img src="../images/A.png" alt="" @click="hit()" class="monsterimg" />
       </div>
     </div>
   </div>
@@ -62,7 +73,7 @@ export default {
       world: 1,
       elementVisible:false,
       skills:{
-        powerhit:{dps:100, isactive:false},
+        powerhit:{dps:2, isactive:false},
       }
     };
   },
@@ -70,10 +81,11 @@ export default {
     hit() {
       this.elementVisible=true;
       setTimeout(() => this.elementVisible = false, 100)
+
       this.monster.health -=
         this.hero.hitpower + this.hero.weapon + 2 * this.hero.lvl;
-        if(this.powerhit){
-          this.monster.health -=(this.hero.hitpower + this.hero.weapon + 2 * this.hero.lvl)*this.powerhit.dps;
+        if(this.skills.powerhit.isactive==true){
+          this.monster.health -=((this.hero.hitpower + this.hero.weapon + 2 * this.hero.lvl)*this.skills.powerhit.dps);
         }
       if (this.monster.health <= 0) {
         this.stage++;
@@ -106,6 +118,10 @@ export default {
         this.hero.maxlvlvalue = parseInt(this.hero.maxlvlvalue * 1.1);
       }
     },
+    usepowerhit(){
+      this.skills.powerhit.isactive=true;
+      setTimeout(() => this.skills.powerhit.isactive = false, 30000)
+    }
   },
 };
 </script>
