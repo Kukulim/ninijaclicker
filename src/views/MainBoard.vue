@@ -18,13 +18,13 @@
         <p>skills:</p>
         <div class="row">
           <div class="col">
-            <div @click="usefury()"><img src="../images/skills/a.png" alt="" class="btn btn-info skillsbutton"></div>
+            <div @click="usefury()" :class="activefury()"><img src="../images/skills/a.png" alt="" class="btn btn-info skillsbutton"></div>
           </div>
           <div class="col">
-            <div @click="usepowerhit()"><img src="../images/skills/b.png" alt="" class="btn btn-danger skillsbutton"></div>
+            <div @click="usepowerhit()" :class="activepowerhit()"><img src="../images/skills/b.png" alt="" class="btn btn-danger skillsbutton"></div>
           </div>
           <div class="col">
-            <div @click="useshurikenwind()"><img src="../images/skills/c.png" alt="" class="btn btn-success skillsbutton"></div>
+            <div @click="useshurikenwind()" :class="activeshurikenwind()"><img src="../images/skills/c.png" alt="" class="btn btn-success skillsbutton"></div>
           </div>
         </div>
       </div>
@@ -148,6 +148,18 @@ export default {
     getClass(){
       if(this.stage == 25 || this.stage == 50 || this.stage == 75) return "miniboss";
       if (this.stage == 100) return "bigboss"
+    },
+    activefury(){
+      if(this.hero.lvl>=10) return "";
+      else return "disableddiv";
+    },
+    activepowerhit(){
+      if(this.hero.lvl>=20) return "";
+      else return "disableddiv";
+    },
+    activeshurikenwind(){
+      if(this.hero.lvl>=30) return "";
+      else return "disableddiv";
     }
   },
 };
