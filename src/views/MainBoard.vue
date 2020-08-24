@@ -5,6 +5,13 @@
         <div>
           <p>Gold: {{ hero.gold }}</p>
         </div>
+        
+        <img src="../images/armor/cap.png" alt="cap" class="capimg">
+        <img src="../images/armor/katana.png" alt="cap" class="katanaimg">
+        <img src="../images/armor/shuriken.png" alt="cap" class="shurikenimg">
+        <img src="../images/armor/sai.png" alt="cap" class="saiimg">
+        <img src="../images/armor/knife.png" alt="cap" class="knifeimg">
+
         <img src="../images/hero.png" class="heroimg">
         <p>hero lvl: {{ hero.lvl }}</p>
         <div class="proggresbar">
