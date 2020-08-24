@@ -42,7 +42,11 @@
         ></b-progress>
         <div v-show="elementVisible" class="hideElement hitpozition">-{{monster.health-monster.health}}</div>
         </div>
-        <img src="../images/A.png" alt="" @click="hit()" class="monsterimg" />
+        <img 
+        :src="require(`@/images/${monster.type[0]}.png`)" 
+        alt="" @click="hit()" 
+        class="monsterimg"
+        v-bind:class="getClass()" />
       </div>
     </div>
   </div>
@@ -60,6 +64,7 @@ export default {
         bosshealth: 30,
         bosspower: 2,
         worldbosspower: 2,
+        type:["A","B","C","D","E","F"]
       },
       hero: {
         lvl: 1,
@@ -74,16 +79,14 @@ export default {
       elementVisible:false,
       skills:{
         fury:{dps:2, isactive:false},
-        powerhit:{dps:50, isactive:false},
-        shurikenwind:{timeleft:50}
+        powerhit:{dps:50, isactive:false}
       }
     };
   },
   methods: {
     hit() {
       this.elementVisible=true;
-      setTimeout(() => this.elementVisible = false, 100)
-
+      setTimeout(() => this.elementVisible = false, 100);
       this.monster.health -=
         this.hero.hitpower + this.hero.weapon + 2 * this.hero.lvl;
         if(this.skills.fury.isactive==true){
@@ -95,6 +98,7 @@ export default {
         }
       if (this.monster.health <= 0) {
         this.stage++;
+        this.shuffleMosnsters();
         this.hero.gold=parseInt(1.1*this.stage*this.world);
         this.hero.exp += 10;
         this.monster.health = this.monster.basehealth + this.stage * this.world;
@@ -134,6 +138,16 @@ export default {
     useshurikenwind(){
         var myTimer = setInterval(() => this.hit(), 500);
         setTimeout(() =>  clearInterval(myTimer), 30000);
+    },
+    shuffleMosnsters() {
+      for (let i = this.monster.type.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [this.monster.type[i], this.monster.type[j]] = [this.monster.type[j], this.monster.type[i]];
+      }
+    },
+    getClass(){
+      if(this.stage == 25 || this.stage == 50 || this.stage == 75) return "miniboss";
+      if (this.stage == 100) return "bigboss"
     }
   },
 };
