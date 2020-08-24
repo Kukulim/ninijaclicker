@@ -64,7 +64,7 @@ export default {
         bosshealth: 30,
         bosspower: 2,
         worldbosspower: 2,
-        type:["A","B","C","D","E","F"]
+        type:["A","B","C","D","E","F","G"]
       },
       hero: {
         lvl: 1,

@@ -22,7 +22,10 @@
 }
 
 .monsterimg{
-  max-height: 300px;
+  min-height: 270px;
+  filter:blur(1px);
+  opacity: 0.5;
+
 }
 
 .monsterhealthproggresbar{
@@ -43,8 +46,8 @@
   max-height: 75px;
 }
 .miniboss{
-  min-height: 330px;
+  min-height: 350px;
 }
 .bigboss{
-  min-height: 350px;
+  min-height: 400px;
 }
