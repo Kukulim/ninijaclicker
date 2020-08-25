@@ -117,7 +117,14 @@
                   alt=""
                   class="btn btn-info skillsbutton"
                 />
+              </div>
+              <div class="dropdown">
                 <p>FURY</p>
+                <div class="dropdown-content">
+                  <span>5 lvl to unlock.                    
+                  </span><br>
+                  <span> multiple dps for 30s. </span>
+                </div>
               </div>
             </div>
             <div class="col">
@@ -127,7 +134,14 @@
                   alt=""
                   class="btn btn-danger skillsbutton"
                 />
+              </div>
+              <div class="dropdown">
                 <p>POWER HIT</p>
+                <div class="dropdown-content">
+                  <span>10 lvl to unlock.                    
+                  </span><br>
+                  <span>another hit + 50 dps</span>
+                </div>
               </div>
             </div>
             <div class="col">
@@ -137,7 +151,14 @@
                   alt=""
                   class="btn btn-success skillsbutton"
                 />
+              </div>
+              <div class="dropdown">
                 <p>SHURIKEN WIND</p>
+                <div class="dropdown-content">
+                  <span>20 lvl to unlock.                    
+                  </span><br>
+                  <span>auto attacks for 30s.</span>
+                </div>
               </div>
             </div>
           </div>
@@ -308,45 +329,45 @@ export default {
     buycap() {
       if (this.hero.gold >= this.equipment.cap.cost) {
         this.hero.gold -= this.equipment.cap.cost;
-        this.equipment.cap.dps++;
+        this.equipment.cap.dps += 2;
         this.equipment.cap.lvl++;
-        this.equipment.cap.cost += 89;
+        this.equipment.cap.cost += 29;
         this.equipment.cap.status = true;
       }
     },
     buykatana() {
       if (this.hero.gold >= this.equipment.katana.cost) {
         this.hero.gold -= this.equipment.katana.cost;
-        this.equipment.katana.dps += 2;
+        this.equipment.katana.dps += 4;
         this.equipment.katana.lvl++;
-        this.equipment.katana.cost += 99;
+        this.equipment.katana.cost += 49;
         this.equipment.katana.status = true;
       }
     },
     buyshuriken() {
       if (this.hero.gold >= this.equipment.shuriken.cost) {
         this.hero.gold -= this.equipment.shuriken.cost;
-        this.equipment.shuriken.dps += 3;
+        this.equipment.shuriken.dps += 6;
         this.equipment.shuriken.lvl++;
-        this.equipment.shuriken.cost += 109;
+        this.equipment.shuriken.cost += 69;
         this.equipment.shuriken.status = true;
       }
     },
     buysai() {
       if (this.hero.gold >= this.equipment.sai.cost) {
         this.hero.gold -= this.equipment.sai.cost;
-        this.equipment.sai.dps += 4;
+        this.equipment.sai.dps += 8;
         this.equipment.sai.lvl++;
-        this.equipment.sai.cost += 149;
+        this.equipment.sai.cost += 89;
         this.equipment.sai.status = true;
       }
     },
     buyknife() {
       if (this.hero.gold >= this.equipment.knife.cost) {
         this.hero.gold -= this.equipment.knife.cost;
-        this.equipment.knife.dps += 6;
+        this.equipment.knife.dps += 12;
         this.equipment.knife.lvl++;
-        this.equipment.knife.cost += 189;
+        this.equipment.knife.cost += 109;
         this.equipment.knife.status = true;
       }
     },
