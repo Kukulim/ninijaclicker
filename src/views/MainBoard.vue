@@ -2,13 +2,13 @@
   <div class="container">
     <div class="row mt-5">
       <div class="col">
-        <img src="../images/gold.png" alt="cap" class="goldimg" />
+        <img src="../images/gold.png" alt="cap" class="goldimg"/>
         <div>
           <div class="goldvalue mt-2">: {{ hero.gold }}</div>
         </div>
         <div class="mt-5">
-          <img src="../images/armor/cap.png" alt="cap" class="capimg opaticyimg" />
-          <div class="capequipnemtvalue">
+          <img src="../images/armor/cap.png" alt="cap" class="capimg" @click="buycap()" v-bind:class="[{ 'opaticyimgbuyed': equipment.cap.status },'opaticyimg']"/>
+          <div class="capequipnemtvalue" >
             <span>cost: {{equipment.cap.cost}}</span><br>
             <span>lvl: {{equipment.cap.lvl}}</span><br>
             <span>dps: {{equipment.cap.dps}}</span>
@@ -138,7 +138,7 @@ export default {
         powerhit: { dps: 50, isactive: false },
       },
       equipment:{
-        cap:{lvl:0, dps:1, cost:5},
+        cap:{lvl:0, dps:1, cost:5, status:false},
         katana:{lvl:0, dps:2, cost:10},
         shuriken:{lvl:0, dps:3, cost:20},
         sai:{lvl:0, dps:4, cost:30},
@@ -233,6 +233,15 @@ export default {
       if (this.hero.lvl >= 30) return "";
       else return "disableddiv";
     },
+    buycap(){
+      if(this.hero.gold>=this.equipment.cap.cost){
+        this.hero.gold-=this.equipment.cap.cost;
+      this.equipment.cap.dps++;
+      this.equipment.cap.lvl++;
+      this.equipment.cap.cost+=89;
+      this.equipment.cap.status=true;
+      }
+    }
   },
 };
 </script>

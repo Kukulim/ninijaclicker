@@ -14,6 +14,7 @@
   opacity: 0.1;
   padding:15px;
   height: 450px;
+  z-index: -100;
 }
 
 .proggresbar{
@@ -28,6 +29,9 @@
 }
 .opaticyimg{
   opacity: 0.2;
+}
+.opaticyimgbuyed{
+  opacity: 0.5;
 }
 
 .monsterhealthproggresbar{
@@ -57,26 +61,31 @@
   position: absolute;
   top: 55px;
   right: 155px;
+  z-index: 5;
 }
 .katanaimg{
   position: absolute;
   top: 155px;
   right: 260px;
+  z-index: 5;
 }
 .shurikenimg{
   position: absolute;
   top: 155px;
   right: 155px;
+  z-index: 5;
 }
 .saiimg{
   position: absolute;
   top: 255px;
   right: 155px;
+  z-index: 5;
 }
 .knifeimg{
   position: absolute;
   top: 355px;
   right: 155px;
+  z-index: 5;
 }
 .goldimg{
   position: absolute;
@@ -92,7 +101,9 @@
 .capequipnemtvalue{
   position: absolute;
   top: 55px;
-  right: 187px;
+  right: 165px;
+  z-index: 15;
+  pointer-events: none;
 }
 .katanaequipnemtvalue{
   position: absolute;
