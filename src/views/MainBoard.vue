@@ -96,7 +96,7 @@
             class="mb-3"
           ></b-progress>
           <div v-show="elementVisible" class="hideElement hitpozition">
-            -{{ monster.health - monster.health }}
+            -{{ hero.hitpower }}
           </div>
         </div>
         <img
@@ -129,9 +129,8 @@ export default {
         lvl: 1,
         exp: 0,
         maxlvlvalue: 100,
-        hitpower: 1,
-        weapon: 2,
         gold: 0,
+        hitpower: 0
       },
       skills: {
         fury: { dps: 2, isactive: false },
@@ -153,15 +152,18 @@ export default {
     hit() {
       this.elementVisible = true;
       setTimeout(() => (this.elementVisible = false), 100);
-      this.monster.health -=
-        this.hero.hitpower + this.hero.weapon + 2 * this.hero.lvl;
+
+      this.hero.hitpower = this.hero.lvl+this.equipment.cap.dps+this.equipment.katana.dps+this.equipment.shuriken.dps+this.equipment.sai.dps+this.equipment.knife.dps;
+
+      this.monster.health -=this.hero.hitpower
       if (this.skills.fury.isactive == true) {
+        this.hero.hitpower*=this.skills.fury.dps;
         this.monster.health -=
-          (this.hero.hitpower + this.hero.weapon + 2 * this.hero.lvl) *
-          this.skills.fury.dps;
+          this.hero.hitpower;
       }
       if (this.skills.powerhit.isactive == true) {
-        this.monster.health -= this.skills.powerhit.dps;
+        this.hero.hitpower = this.skills.powerhit.dps*this.hero.lvl
+        this.monster.health -= this.hero.hitpower;
         this.skills.powerhit.isactive = false;
       }
       if (this.monster.health <= 0) {
