@@ -117,10 +117,10 @@ export default {
   data() {
     return {
       monster: {
-        basehealth: 30,
-        health: 30,
-        currentmonsterhealth: 30,
-        bosshealth: 30,
+        basehealth: 80,
+        health: 80,
+        currentmonsterhealth: 80,
+        bosshealth: 500,
         bosspower: 2,
         worldbosspower: 2,
         type: ["A", "B", "C", "D", "E", "F", "G"],
@@ -169,9 +169,12 @@ export default {
       if (this.monster.health <= 0) {
         this.stage++;
         this.shuffleMosnsters();
-        this.hero.gold = parseInt(1.1 * this.stage * this.world);
+        this.hero.gold += parseInt(1.1 * this.stage * this.world);
         this.hero.exp += 10;
-        this.monster.health = this.monster.basehealth + this.stage * this.world;
+
+        this.monster.basehealth +=this.stage * this.world * 2
+        this.monster.health = this.monster.basehealth;
+
         this.monster.currentmonsterhealth = this.monster.health;
         if (this.stage == 25 || this.stage == 50 || this.stage == 75) {
           this.monster.health =
