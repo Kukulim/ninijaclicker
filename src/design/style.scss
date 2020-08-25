@@ -108,20 +108,28 @@
 .katanaequipnemtvalue{
   position: absolute;
   top: 155px;
-  right: 285px;
+  right: 270px;
+  z-index: 15;
+  pointer-events: none;
 }
 .shurikenequipnemtvalue{
   position: absolute;
   top: 155px;
-  right: 179px;
+  right: 165px;
+  z-index: 15;
+  pointer-events: none;
 }
 .saiequipnemtvalue{
   position: absolute;
   top: 255px;
-  right: 179px;
+  right: 165px;
+  z-index: 15;
+  pointer-events: none;
 }
 .knifeequipnemtvalue{
   position: absolute;
   top: 355px;
-  right: 179px;
+  right: 165px;
+  z-index: 15;
+  pointer-events: none;
 }
