@@ -11,7 +11,7 @@
   opacity: 0.8;
 }
 .heroimg{
-  opacity: 0.3;
+  opacity: 0.1;
   padding:15px;
   height: 450px;
 }
@@ -25,7 +25,9 @@
   min-height: 270px;
   filter:blur(1px);
   opacity: 0.5;
-
+}
+.opaticyimg{
+  opacity: 0.2;
 }
 
 .monsterhealthproggresbar{
@@ -86,4 +88,29 @@
   top: -35px;
   right: 200px;
   font-size:30px
+}
+.capequipnemtvalue{
+  position: absolute;
+  top: 55px;
+  right: 187px;
+}
+.katanaequipnemtvalue{
+  position: absolute;
+  top: 155px;
+  right: 285px;
+}
+.shurikenequipnemtvalue{
+  position: absolute;
+  top: 155px;
+  right: 179px;
+}
+.saiequipnemtvalue{
+  position: absolute;
+  top: 255px;
+  right: 179px;
+}
+.knifeequipnemtvalue{
+  position: absolute;
+  top: 355px;
+  right: 179px;
 }

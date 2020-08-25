@@ -7,15 +7,40 @@
           <div class="goldvalue mt-2">: {{ hero.gold }}</div>
         </div>
         <div class="mt-5">
-          <img src="../images/armor/cap.png" alt="cap" class="capimg" />
-          <img src="../images/armor/katana.png" alt="cap" class="katanaimg" />
+          <img src="../images/armor/cap.png" alt="cap" class="capimg opaticyimg" />
+          <div class="capequipnemtvalue">
+            <span>cost: {{equipment.cap.cost}}</span><br>
+            <span>lvl: {{equipment.cap.lvl}}</span><br>
+            <span>dps: {{equipment.cap.dps}}</span>
+          </div>
+          <img src="../images/armor/katana.png" alt="cap" class="katanaimg opaticyimg" />
+          <div class="katanaequipnemtvalue">
+            <span>cost: {{equipment.katana.cost}}</span><br>
+            <span>lvl: {{equipment.katana.lvl}}</span><br>
+            <span>dps: {{equipment.katana.dps}}</span>
+          </div>
           <img
             src="../images/armor/shuriken.png"
             alt="cap"
-            class="shurikenimg"
+            class="shurikenimg opaticyimg"
           />
-          <img src="../images/armor/sai.png" alt="cap" class="saiimg" />
-          <img src="../images/armor/knife.png" alt="cap" class="knifeimg" />
+          <div class="shurikenequipnemtvalue">
+            <span>cost: {{equipment.shuriken.cost}}</span><br>
+            <span>lvl: {{equipment.shuriken.lvl}}</span><br>
+            <span>dps: {{equipment.shuriken.dps}}</span>
+          </div>
+          <img src="../images/armor/sai.png" alt="cap" class="saiimg opaticyimg" />
+          <div class="saiequipnemtvalue">
+            <span>cost: {{equipment.sai.cost}}</span><br>
+            <span>lvl: {{equipment.sai.lvl}}</span><br>
+            <span>dps: {{equipment.sai.dps}}</span>
+          </div>
+          <img src="../images/armor/knife.png" alt="cap" class="knifeimg opaticyimg" />
+          <div class="knifeequipnemtvalue">
+            <span>cost: {{equipment.knife.cost}}</span><br>
+            <span>lvl: {{equipment.knife.lvl}}</span><br>
+            <span>dps: {{equipment.knife.dps}}</span>
+          </div>
 
           <img src="../images/hero.png" class="heroimg" />
           <p>hero lvl: {{ hero.lvl }}</p>
@@ -108,13 +133,20 @@ export default {
         weapon: 2,
         gold: 0,
       },
-      stage: 1,
-      world: 1,
-      elementVisible: false,
       skills: {
         fury: { dps: 2, isactive: false },
         powerhit: { dps: 50, isactive: false },
       },
+      equipment:{
+        cap:{lvl:0, dps:1, cost:5},
+        katana:{lvl:0, dps:2, cost:10},
+        shuriken:{lvl:0, dps:3, cost:20},
+        sai:{lvl:0, dps:4, cost:30},
+        knife:{lvl:0, dps:5, cost:50},
+      },
+      stage: 1,
+      world: 1,
+      elementVisible: false,
     };
   },
   methods: {
