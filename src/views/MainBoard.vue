@@ -209,15 +209,16 @@ export default {
         type: ["A", "B", "C", "D", "E", "F", "G"],
       },
       hero: {
-        lvl: 1,
+        lvl: 100,
         exp: 0,
         maxlvlvalue: 100,
         gold: 0,
         hitpower: 0,
       },
       skills: {
-        fury: { dps: 2, isactive: false },
-        powerhit: { dps: 50, isactive: false },
+        fury: { dps: 2, isactive: false, cooldown:false},
+        powerhit: { dps: 50, isactive: false, cooldown:false },
+        shurikenwind:{cooldown:false}
       },
       equipment: {
         cap: { lvl: 0, dps: 1, cost: 5, status: false },
@@ -237,7 +238,7 @@ export default {
       setTimeout(() => (this.elementVisible = false), 100);
 
       this.hero.hitpower =
-        this.hero.lvl * 2 +
+        this.hero.lvl * 3 +
         this.equipment.cap.dps +
         this.equipment.katana.dps +
         this.equipment.shuriken.dps +
@@ -280,6 +281,7 @@ export default {
         }
       }
       if (this.stage == 101) {
+        this.hero.gold += parseInt(5 * this.stage * this.world)
         this.stage = 1;
         this.world++;
       }
@@ -290,15 +292,30 @@ export default {
       }
     },
     usefury() {
-      this.skills.fury.isactive = true;
-      setTimeout(() => (this.skills.fury.isactive = false), 30000);
+      if(this.skills.fury.cooldown==false)
+      {
+        this.skills.fury.isactive = true;
+        this.skills.fury.cooldown = true;
+        setTimeout(() => (this.skills.fury.isactive = false), 30000);
+        setTimeout(() => (this.skills.fury.cooldown = false),40000);
+      }
     },
     usepowerhit() {
-      this.skills.powerhit.isactive = true;
+      if(this.skills.powerhit.cooldown==false)
+      {
+        this.skills.powerhit.cooldown = true;
+        this.skills.powerhit.isactive = true;
+        setTimeout(() => (this.skills.powerhit.cooldown = false),40000);
+      }
     },
     useshurikenwind() {
-      var myTimer = setInterval(() => this.hit(), 500);
-      setTimeout(() => clearInterval(myTimer), 30000);
+      if(this.skills.shurikenwind.cooldown==false)
+      {
+        this.skills.shurikenwind.cooldown=true;
+        var myTimer = setInterval(() => this.hit(), 500);
+        setTimeout(() => clearInterval(myTimer), 30000);
+        setTimeout(() => (this.skills.shurikenwind.cooldown = false),40000);
+      }
     },
     shuffleMosnsters() {
       for (let i = this.monster.type.length - 1; i > 0; i--) {
