@@ -110,6 +110,7 @@
 
           <p>SKILLS:</p>
           <div class="row">
+
             <div class="col">
               <div @click="usefury()" :class="activefury()">
                 <img
@@ -126,7 +127,19 @@
                   <span> multiple dps for 30s. </span>
                 </div>
               </div>
+              <circular-count-down-timer
+                :initial-value=5
+                :steps="30"
+                :size="75"
+                :second-label="''"
+                :seconds-stroke-color="'#01525f'"
+                :paused=skills.fury.cdtimer
+                @update="updated"
+                ref="count"
+                v-show="skills.fury.cdtimer==false"
+              ></circular-count-down-timer>
             </div>
+
             <div class="col">
               <div @click="usepowerhit()" :class="activepowerhit()">
                 <img
@@ -144,6 +157,7 @@
                 </div>
               </div>
             </div>
+
             <div class="col">
               <div @click="useshurikenwind()" :class="activeshurikenwind()">
                 <img
@@ -195,6 +209,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Ninija",
   data() {
@@ -216,7 +231,7 @@ export default {
         hitpower: 0,
       },
       skills: {
-        fury: { dps: 2, isactive: false, cooldown:false},
+        fury: { dps: 2, isactive: false, cooldown:false, cdtimer:false},
         powerhit: { dps: 50, isactive: false, cooldown:false },
         shurikenwind:{cooldown:false}
       },
@@ -296,8 +311,20 @@ export default {
       {
         this.skills.fury.isactive = true;
         this.skills.fury.cooldown = true;
+        this.updateCountdown(29);
         setTimeout(() => (this.skills.fury.isactive = false), 30000);
         setTimeout(() => (this.skills.fury.cooldown = false),40000);
+      }
+    },
+    updateCountdown: function(sec) {
+      this.$refs.count.updateTime(sec);
+
+    },
+    updated: function() {
+      if (this.$refs.count.value == 1) {
+        this.skills.fury.cdtimer = true;
+      } else {
+        this.skills.fury.cdtimer = false;
       }
     },
     usepowerhit() {
