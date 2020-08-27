@@ -128,14 +128,14 @@
                 </div>
               </div>
               <circular-count-down-timer
-                :initial-value=5
+                :initial-value=1
                 :steps="30"
                 :size="75"
                 :second-label="''"
                 :seconds-stroke-color="'#01525f'"
                 :paused=skills.fury.cdtimer
                 @update="updated"
-                ref="count"
+                ref="furytimer"
                 v-show="skills.fury.cdtimer==false"
               ></circular-count-down-timer>
             </div>
@@ -231,7 +231,7 @@ export default {
         hitpower: 0,
       },
       skills: {
-        fury: { dps: 2, isactive: false, cooldown:false, cdtimer:false},
+        fury: { dps: 2, isactive: false, cooldown:false, cdtimer:true},
         powerhit: { dps: 50, isactive: false, cooldown:false },
         shurikenwind:{cooldown:false}
       },
@@ -311,17 +311,13 @@ export default {
       {
         this.skills.fury.isactive = true;
         this.skills.fury.cooldown = true;
-        this.updateCountdown(29);
+        this.$refs.furytimer.updateTime(29);
         setTimeout(() => (this.skills.fury.isactive = false), 30000);
         setTimeout(() => (this.skills.fury.cooldown = false),40000);
       }
     },
-    updateCountdown: function(sec) {
-      this.$refs.count.updateTime(sec);
-
-    },
     updated: function() {
-      if (this.$refs.count.value == 1) {
+      if (this.$refs.furytimer.value == 1) {
         this.skills.fury.cdtimer = true;
       } else {
         this.skills.fury.cdtimer = false;
