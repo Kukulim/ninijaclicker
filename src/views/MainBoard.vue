@@ -129,14 +129,15 @@
               </div>
               <circular-count-down-timer
                 :initial-value=1
-                :steps="30"
+                :steps="300"
                 :size="75"
                 :second-label="''"
                 :seconds-stroke-color="'#01525f'"
                 :paused=skills.fury.cdtimer
-                @update="updated"
+                @update="updatedfury"
                 ref="furytimer"
                 v-show="skills.fury.cdtimer==false"
+                class="furytimer"
               ></circular-count-down-timer>
             </div>
 
@@ -311,12 +312,12 @@ export default {
       {
         this.skills.fury.isactive = true;
         this.skills.fury.cooldown = true;
-        this.$refs.furytimer.updateTime(29);
+        this.$refs.furytimer.updateTime(299);
         setTimeout(() => (this.skills.fury.isactive = false), 30000);
-        setTimeout(() => (this.skills.fury.cooldown = false),40000);
+        setTimeout(() => (this.skills.fury.cooldown = false), 300000);
       }
-    },
-    updated: function() {
+    },    
+    updatedfury: function() {
       if (this.$refs.furytimer.value == 1) {
         this.skills.fury.cdtimer = true;
       } else {
