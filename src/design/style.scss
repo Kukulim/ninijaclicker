@@ -48,8 +48,29 @@
 }
 
 .skillsbutton{
-  max-width: 75px;
-  max-height: 75px;
+  width: 75px;
+  height: 70px;
+}
+.btnfurymin{
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top:100px;
+  right:400px;
+}
+.btnpowermin{
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top:175px;
+  right:400px;
+}
+.btnwindmin{
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top:250px;
+  right:400px;
 }
 .miniboss{
   min-height: 350px;
@@ -158,4 +179,14 @@
   position: absolute;
   top: 0px;
   right: 65px;
+}
+.powerhittimer{
+  position: absolute;
+  top: 0px;
+  right: 62px;
+}
+.shurikenwindtimer{
+  position: absolute;
+  top: 0px;
+  right: 62px;
 }

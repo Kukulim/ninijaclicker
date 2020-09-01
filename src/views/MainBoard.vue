@@ -96,6 +96,29 @@
           </div>
 
           <img src="../images/hero.png" class="heroimg" />
+
+          <div v-show="skills.fury.isactive">
+                <img
+                  src="../images/skills/a.png"
+                  alt=""
+                  class="btn btn-info btnfurymin disableddiv"
+                />
+              </div>
+          <div v-show="skills.powerhit.isactive">
+                <img
+                  src="../images/skills/b.png"
+                  alt=""
+                  class="btn btn-danger btnpowermin disableddiv"
+                />
+              </div>
+          <div v-show="skills.shurikenwind.isactive">
+                <img
+                  src="../images/skills/c.png"
+                  alt=""
+                  class="btn btn-success btnwindmin disableddiv"
+                />
+          </div>
+
           <p>LVL: {{ hero.lvl }}</p>
           <div class="proggresbar">
             <b-progress
@@ -110,6 +133,8 @@
 
           <p>SKILLS:</p>
           <div class="row">
+
+            <!-- FURY -->
 
             <div class="col">
               <div @click="usefury()" :class="activefury()">
@@ -141,6 +166,8 @@
               ></circular-count-down-timer>
             </div>
 
+            <!-- POWERHIT -->
+
             <div class="col">
               <div @click="usepowerhit()" :class="activepowerhit()">
                 <img
@@ -157,7 +184,21 @@
                   <span>another hit + 50 dps</span>
                 </div>
               </div>
+              <circular-count-down-timer
+                :initial-value=1
+                :steps="30"
+                :size="75"
+                :second-label="''"
+                :seconds-stroke-color="'#ad1725'"
+                :paused=skills.powerhit.cdtimer
+                @update="updatedpowerhit"
+                ref="powerhittimer"
+                v-show="skills.powerhit.cdtimer==false"
+                class="powerhittimer"
+              ></circular-count-down-timer>
             </div>
+
+            <!-- SHURIKEN WIND -->
 
             <div class="col">
               <div @click="useshurikenwind()" :class="activeshurikenwind()">
@@ -175,6 +216,18 @@
                   <span>auto attacks for 30s.</span>
                 </div>
               </div>
+                            <circular-count-down-timer
+                :initial-value=1
+                :steps="180"
+                :size="75"
+                :second-label="''"
+                :seconds-stroke-color="'#0d6922'"
+                :paused=skills.shurikenwind.cdtimer
+                @update="updatedshurikenwind"
+                ref="shurikenwind"
+                v-show="skills.shurikenwind.cdtimer==false"
+                class="shurikenwindtimer"
+              ></circular-count-down-timer>
             </div>
           </div>
         </div>
@@ -233,8 +286,8 @@ export default {
       },
       skills: {
         fury: { dps: 2, isactive: false, cooldown:false, cdtimer:true},
-        powerhit: { dps: 50, isactive: false, cooldown:false },
-        shurikenwind:{cooldown:false}
+        powerhit: { dps: 50, isactive: false, cooldown:false, cdtimer:true },
+        shurikenwind:{isactive: false, cooldown:false, cdtimer:true}
       },
       equipment: {
         cap: { lvl: 0, dps: 1, cost: 5, status: false },
@@ -329,16 +382,34 @@ export default {
       {
         this.skills.powerhit.cooldown = true;
         this.skills.powerhit.isactive = true;
-        setTimeout(() => (this.skills.powerhit.cooldown = false),40000);
+        this.$refs.powerhittimer.updateTime(29);
+        setTimeout(() => (this.skills.powerhit.cooldown = false),30000);
+      }
+    },
+    updatedpowerhit(){
+      if (this.$refs.powerhittimer.value == 1) {
+        this.skills.powerhit.cdtimer = true;
+      } else {
+        this.skills.powerhit.cdtimer = false;
       }
     },
     useshurikenwind() {
       if(this.skills.shurikenwind.cooldown==false)
       {
+        this.skills.shurikenwind.isactive=true;
         this.skills.shurikenwind.cooldown=true;
+        this.$refs.shurikenwind.updateTime(179);
         var myTimer = setInterval(() => this.hit(), 500);
         setTimeout(() => clearInterval(myTimer), 30000);
-        setTimeout(() => (this.skills.shurikenwind.cooldown = false),40000);
+        setTimeout(() => this.skills.shurikenwind.isactive=false, 30000);
+        setTimeout(() => (this.skills.shurikenwind.cooldown = false),180000);
+      }
+    },
+    updatedshurikenwind(){
+      if (this.$refs.shurikenwind.value == 1) {
+        this.skills.shurikenwind.cdtimer = true;
+      } else {
+        this.skills.shurikenwind.cdtimer = false;
       }
     },
     shuffleMosnsters() {
