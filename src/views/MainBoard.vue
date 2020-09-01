@@ -239,6 +239,9 @@
         <div>
           <p>STAGE: {{ stage }} WORLD: {{ world }}</p>
         </div>
+        <div class="heroimg">
+
+
         <div class="monsterhealthproggresbar mt-5">
           <b-progress
             :value="monster.health"
@@ -257,6 +260,7 @@
           class="monsterimg"
           v-bind:class="getClass()"
         />
+        </div>
       </div>
     </div>
   </div>
@@ -278,7 +282,7 @@ export default {
         type: ["A", "B", "C", "D", "E", "F", "G"],
       },
       hero: {
-        lvl: 100,
+        lvl: 1,
         exp: 0,
         maxlvlvalue: 100,
         gold: 0,
@@ -307,7 +311,7 @@ export default {
       setTimeout(() => (this.elementVisible = false), 100);
 
       this.hero.hitpower =
-        this.hero.lvl * 3 +
+        ((this.hero.lvl + this.hero.lvl) * 3) +
         this.equipment.cap.dps +
         this.equipment.katana.dps +
         this.equipment.shuriken.dps +
