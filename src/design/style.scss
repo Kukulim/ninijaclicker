@@ -31,7 +31,6 @@
 .monsterimg{
   min-height: 270px;
   filter:blur(1px);
-  opacity: 0.5;
 }
 .opaticyimg{
   opacity: 0.2;
@@ -41,10 +40,12 @@
 }
 
 .monsterhealthproggresbar{
-  max-width: 150px;
+  max-width: 350px;
   margin: 0 auto;
 }
-
+.worldstats{
+  font-size: 22px;
+}
 .hitpozition {
   position: absolute;
   color:rgb(107, 6, 6);

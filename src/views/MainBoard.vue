@@ -236,8 +236,8 @@
       <!--Monster Side-->
 
       <div class="col">
-        <div>
-          <p>STAGE: {{ stage }} WORLD: {{ world }}</p>
+        <div class="worldstats">
+          <p class="worldstats">STAGE: {{ stage }} WORLD: {{ world }}</p>
         </div>
         <div class="heroimg">
 
@@ -254,7 +254,7 @@
           </div>
         </div>
         <img
-          :src="require(`@/images/${monster.type[0]}.png`)"
+          :src="require(`@/images/zombies/${monster.type[0]}.png`)"
           alt=""
           @click="hit()"
           class="monsterimg"
