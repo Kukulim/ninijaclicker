@@ -206,21 +206,17 @@
 }
 .junkitem{
   border-style: solid;
-  border-color: rgb(121, 121, 121);
+  border-color: rgb(121, 121, 121, 1);
 }
 .magicitem{
-  border-style: solid;
-  border-color: green;
+  border: 3px solid rgb(43, 253, 1, 1);
 }
 .rareitem{
-  border-style: solid;
-  border-color: rgb(17, 53, 214);
+  border: 3px solid rgb(51, 88, 255, 1);
 }
 .uniqueitem{
-  border-style: solid;
-  border-color: rgb(226, 174, 5);
+  border: 3px solid rgb(255, 211, 67, 1);
 }
 .legenditem{
-  border-style: solid;
-  border-color: rgb(241, 8, 105);
+  border: 3px solid rgb(255, 60, 255, 1);
 }

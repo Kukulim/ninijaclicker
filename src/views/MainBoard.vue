@@ -290,7 +290,7 @@ export default {
       },
       skills: {
         fury: { dps: 2, isactive: false, cooldown:false, cdtimer:true},
-        powerhit: { dps: 75, isactive: false, cooldown:false, cdtimer:true },
+        powerhit: { dps: 150, isactive: false, cooldown:false, cdtimer:true },
         shurikenwind:{isactive: false, cooldown:false, cdtimer:true}
       },
       equipment: {
@@ -310,13 +310,16 @@ export default {
       this.elementVisible = true;
       setTimeout(() => (this.elementVisible = false), 100);
 
+      var random = Math.floor(Math.random() * (6));;
+
       this.hero.hitpower =
         ((this.hero.lvl + this.hero.lvl) * 3) +
         this.equipment.cap.dps +
         this.equipment.katana.dps +
         this.equipment.shuriken.dps +
         this.equipment.sai.dps +
-        this.equipment.knife.dps;
+        this.equipment.knife.dps-4+
+        random;
 
       this.monster.health -= this.hero.hitpower;
       if (this.skills.fury.isactive == true) {
@@ -331,22 +334,25 @@ export default {
       if (this.monster.health <= 0) {
         this.stage++;
         this.shuffleMosnsters();
-        this.hero.gold += parseInt(1.1 * this.stage * this.world * this.world);
+        this.hero.gold += parseInt(1.1 * this.stage * this.world * this.world)-3+random;
+        if(this.hero.gold<=0)this.hero.gold+=1;
         this.hero.exp += 10;
 
         this.monster.basehealth += this.stage * this.world * 2;
         this.monster.health = this.monster.basehealth;
 
         if (this.stage == 25 || this.stage == 50 || this.stage == 75) {
-          this.monster.health *=2;
+          this.monster.health *=3;
         }
         if (this.stage == 100) {
-          this.monster.health *=4;
+          this.monster.health *=6;
         }
         this.monster.currentmonsterhealth = this.monster.health
       }
       if (this.stage == 101) {
         this.monster.basehealth = this.monster.basehealth/2;
+        this.monster.health = this.monster.basehealth;
+        this.monster.currentmonsterhealth = this.monster.health
         this.hero.gold += parseInt(5 * this.stage * this.world);
         this.stage = 1;
         this.world++;
