@@ -260,7 +260,10 @@
           class="monsterimg"
           v-bind:class="getClass()"
         />
+        
         </div>
+        <div v-if="getClass()=='miniboss'" class="bosswarningtext text-danger">BOSS STAGE !!!</div>
+        <div v-if="getClass()=='bigboss'" class="bosswarningtext text-danger">WORLD BOSS STAGE !!!</div>
       </div>
     </div>
   </div>
@@ -273,12 +276,9 @@ export default {
   data() {
     return {
       monster: {
-        basehealth: 80,
-        health: 80,
-        currentmonsterhealth: 80,
-        bosshealth: 500,
-        bosspower: 2,
-        worldbosspower: 4,
+        basehealth: 180,
+        health: 180,
+        currentmonsterhealth: 180,
         type: ["A", "B", "C", "D", "E", "F", "G"],
       },
       hero: {
@@ -290,7 +290,7 @@ export default {
       },
       skills: {
         fury: { dps: 2, isactive: false, cooldown:false, cdtimer:true},
-        powerhit: { dps: 50, isactive: false, cooldown:false, cdtimer:true },
+        powerhit: { dps: 75, isactive: false, cooldown:false, cdtimer:true },
         shurikenwind:{isactive: false, cooldown:false, cdtimer:true}
       },
       equipment: {
@@ -324,37 +324,30 @@ export default {
         this.monster.health -= this.hero.hitpower;
       }
       if (this.skills.powerhit.isactive == true) {
-        this.hero.hitpower = this.skills.powerhit.dps * this.hero.lvl;
+        this.hero.hitpower += this.skills.powerhit.dps * this.hero.lvl;
         this.monster.health -= this.hero.hitpower;
         this.skills.powerhit.isactive = false;
       }
       if (this.monster.health <= 0) {
         this.stage++;
         this.shuffleMosnsters();
-        this.hero.gold += parseInt(1.1 * this.stage * this.world);
+        this.hero.gold += parseInt(1.1 * this.stage * this.world * this.world);
         this.hero.exp += 10;
 
         this.monster.basehealth += this.stage * this.world * 2;
         this.monster.health = this.monster.basehealth;
 
-        this.monster.currentmonsterhealth = this.monster.health;
         if (this.stage == 25 || this.stage == 50 || this.stage == 75) {
-          this.monster.health =
-            this.monster.bosshealth * this.monster.bosspower;
-          this.monster.currentmonsterhealth = this.monster.health;
-          this.monster.bosspower++;
+          this.monster.health *=2;
         }
         if (this.stage == 100) {
-          this.monster.health =
-            this.monster.bosshealth *
-            this.monster.bosspower *
-            this.monster.worldbosspower;
-          this.monster.currentmonsterhealth = this.monster.health;
-          this.monster.worldbosspower += 4;
+          this.monster.health *=4;
         }
+        this.monster.currentmonsterhealth = this.monster.health
       }
       if (this.stage == 101) {
-        this.hero.gold += parseInt(5 * this.stage * this.world)
+        this.monster.basehealth = this.monster.basehealth/2;
+        this.hero.gold += parseInt(5 * this.stage * this.world);
         this.stage = 1;
         this.world++;
       }
@@ -445,45 +438,40 @@ export default {
     buycap() {
       if (this.hero.gold >= this.equipment.cap.cost) {
         this.hero.gold -= this.equipment.cap.cost;
-        this.equipment.cap.dps += 2;
-        this.equipment.cap.lvl++;
-        this.equipment.cap.cost += 29;
+        this.equipment.cap.dps += 2 +this.equipment.cap.lvl++;
+        this.equipment.cap.cost += this.equipment.cap.dps;
         this.equipment.cap.status = true;
       }
     },
     buykatana() {
       if (this.hero.gold >= this.equipment.katana.cost) {
         this.hero.gold -= this.equipment.katana.cost;
-        this.equipment.katana.dps += 4;
-        this.equipment.katana.lvl++;
-        this.equipment.katana.cost += 49;
+        this.equipment.katana.dps += 4 + this.equipment.katana.lvl++;
+        this.equipment.katana.cost += this.equipment.katana.dps;
         this.equipment.katana.status = true;
       }
     },
     buyshuriken() {
       if (this.hero.gold >= this.equipment.shuriken.cost) {
         this.hero.gold -= this.equipment.shuriken.cost;
-        this.equipment.shuriken.dps += 6;
-        this.equipment.shuriken.lvl++;
-        this.equipment.shuriken.cost += 69;
+        this.equipment.shuriken.dps += 6 + this.equipment.shuriken.lvl++;
+        this.equipment.shuriken.cost += this.equipment.shuriken.dps;
         this.equipment.shuriken.status = true;
       }
     },
     buysai() {
       if (this.hero.gold >= this.equipment.sai.cost) {
         this.hero.gold -= this.equipment.sai.cost;
-        this.equipment.sai.dps += 8;
-        this.equipment.sai.lvl++;
-        this.equipment.sai.cost += 89;
+        this.equipment.sai.dps += 8 + this.equipment.sai.lvl++;
+        this.equipment.sai.cost += this.equipment.sai.dps;
         this.equipment.sai.status = true;
       }
     },
     buyknife() {
       if (this.hero.gold >= this.equipment.knife.cost) {
         this.hero.gold -= this.equipment.knife.cost;
-        this.equipment.knife.dps += 12;
-        this.equipment.knife.lvl++;
-        this.equipment.knife.cost += 109;
+        this.equipment.knife.dps += 12 + this.equipment.knife.lvl++;;
+        this.equipment.knife.cost += this.equipment.knife.dps;
         this.equipment.knife.status = true;
       }
     },

@@ -48,10 +48,11 @@
 }
 .hitpozition {
   position: absolute;
-  color:rgb(107, 6, 6);
+  color:rgb(255, 255, 255);
   font-size: 50px;
   top: 125px;
   right: 180px;
+  z-index: 5;
 }
 
 .skillsbutton{
@@ -80,10 +81,16 @@
   right:400px;
 }
 .miniboss{
-  min-height: 350px;
+  background-color: rgb(19, 41, 1);
+  box-shadow: 0px 0px 35px 15px rgb(19, 41, 1);
+  
+}
+.bosswarningtext{
+  font-size: 45px;
 }
 .bigboss{
-  min-height: 400px;
+  background-color: rgb(19, 41, 1);
+  box-shadow: 0px 0px 35px 15px rgb(19, 41, 1);
 }
 .capimg{
   position: absolute;
