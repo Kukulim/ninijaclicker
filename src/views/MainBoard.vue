@@ -476,6 +476,7 @@ export default {
       }
     },
     getrarity(item){
+      if(item.lvl>=0&&item.lvl<10) return "junkitem";
       if(item.lvl>=10&&item.lvl<20) return "magicitem";
       if(item.lvl>=20&&item.lvl<30) return "rareitem";
       if(item.lvl>=30&&item.lvl<60) return "uniqueitem";
