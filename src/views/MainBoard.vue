@@ -16,7 +16,7 @@
             @click="buycap()"
             v-bind:class="[
               { opaticyimgbuyed: equipment.cap.status },
-              'opaticyimg',
+              'opaticyimg', getrarity(this.equipment.cap)
             ]"
           />
           <div class="capequipnemtvalue">
@@ -33,7 +33,7 @@
             @click="buykatana()"
             v-bind:class="[
               { opaticyimgbuyed: equipment.katana.status },
-              'opaticyimg',
+              'opaticyimg', getrarity(this.equipment.katana)
             ]"
           />
           <div class="katanaequipnemtvalue">
@@ -50,7 +50,7 @@
             @click="buyshuriken()"
             v-bind:class="[
               { opaticyimgbuyed: equipment.shuriken.status },
-              'opaticyimg',
+              'opaticyimg', getrarity(this.equipment.shuriken)
             ]"
           />
           <div class="shurikenequipnemtvalue">
@@ -67,7 +67,7 @@
             @click="buysai()"
             v-bind:class="[
               { opaticyimgbuyed: equipment.sai.status },
-              'opaticyimg',
+              'opaticyimg', getrarity(this.equipment.sai)
             ]"
           />
           <div class="saiequipnemtvalue">
@@ -84,7 +84,7 @@
             @click="buyknife()"
             v-bind:class="[
               { opaticyimgbuyed: equipment.knife.status },
-              'opaticyimg',
+              'opaticyimg',getrarity(this.equipment.knife)
             ]"
           />
           <div class="knifeequipnemtvalue">
@@ -285,7 +285,7 @@ export default {
         lvl: 1,
         exp: 0,
         maxlvlvalue: 100,
-        gold: 0,
+        gold: 10000000,
         hitpower: 0,
       },
       skills: {
@@ -475,6 +475,12 @@ export default {
         this.equipment.knife.status = true;
       }
     },
+    getrarity(item){
+      if(item.lvl>=10&&item.lvl<20) return "magicitem";
+      if(item.lvl>=20&&item.lvl<30) return "rareitem";
+      if(item.lvl>=30&&item.lvl<60) return "uniqueitem";
+      if(item.lvl>=60) return "legenditem";
+    }
   },
 };
 </script>
