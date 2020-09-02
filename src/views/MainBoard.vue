@@ -213,7 +213,7 @@
                 <div class="dropdown-content">
                   <span>20 lvl to unlock.                    
                   </span><br>
-                  <span>auto attacks for 30s.</span>
+                  <span>auto attacks for 20s.</span>
                 </div>
               </div>
                             <circular-count-down-timer
@@ -285,7 +285,7 @@ export default {
         lvl: 1,
         exp: 0,
         maxlvlvalue: 100,
-        gold: 10000000,
+        gold: 0,
         hitpower: 0,
       },
       skills: {
@@ -397,8 +397,8 @@ export default {
         this.skills.shurikenwind.cooldown=true;
         this.$refs.shurikenwind.updateTime(179);
         var myTimer = setInterval(() => this.hit(), 500);
-        setTimeout(() => clearInterval(myTimer), 30000);
-        setTimeout(() => this.skills.shurikenwind.isactive=false, 30000);
+        setTimeout(() => clearInterval(myTimer), 20000);
+        setTimeout(() => this.skills.shurikenwind.isactive=false, 20000);
         setTimeout(() => (this.skills.shurikenwind.cooldown = false),180000);
       }
     },
